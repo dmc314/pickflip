@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% import "macros.html" as m %}
 <html lang="en">
-	<body id="container">
+	<body id="container" style="background-color:#FCFCFC">
    		<div id="header">
    			{% block head %}
 				<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no'/>
@@ -48,6 +48,14 @@
 				</div>
 			{% endblock %}
    		</div>
+
+<!-- DAVE LOGO -->
+   		
+   		<center>
+   		<img src="static/images/pickflip_logo_1.png" alt="PickFlip Logo" width="290" height="90"> 
+		</center>
+<!-- DAVE LOGO -->
+   		
    		<!-- Message flashing -->
 		{% with messages = get_flashed_messages(with_categories=true) %}
 		  	{% if messages %}
@@ -60,6 +68,25 @@
 		{% endwith %}
    		<div id="body" class="body">
    			{% block content %}{% endblock %}
+
+
+<!-- DAVE SAMPLE CODE BLOCK  -->
+
+               <h2>Text Similarity Function</h2>
+               <br>
+               <form action="/predict_sim.html" method="POST" enctype="multipart/form-data">
+                    Query Texts: <input type="text" class="form-control" name="query_texts" placeholder="['i like chicken', 'human resources mgmt']"/>
+                    <br><br>
+                    Candidate Texts: <input type="text" class="form-control" name="candidate_texts" placeholder="['i love chicken', 'employment management']"/>
+                    <br><br>
+                    Top K predictions: <input type="int" class="form-control" name="top_k" placeholder="Default=3"/>
+                    <br><br>
+                    <input type="submit" />
+               </form>
+
+<!-- END DAVE SAMPLE CODE BLOCK  -->
+
+
    		</div>
 		<div id="footer">
 			<div class="ui divider"></div>
@@ -73,5 +100,6 @@
 	    		</div>
 	  		</div>
 		</div>
+
 	</body>
 </html>

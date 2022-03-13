@@ -5,7 +5,7 @@ Flask-DebugToolbar==0.10.0
 Flask-Login==0.3.2
 Flask-Mail==0.9.1
 Flask-Script==2.0.5
-Flask-SQLAlchemy==2.1
+Flask-SQLAlchemy==2.5
 Flask-WTF==0.12
 gunicorn==19.4.5
 itsdangerous==0.24
@@ -14,3 +14,8 @@ structlog==16.1.0
 termcolor==1.1.0
 WTForms==2.1
 stripe==2.21.0
+werkzeug==0.16.1
+emoji==1.6.3
+sentence-transformers==2.1.0
+Flask-RESTful==0.3.9
+PyMySQL==1.0.2
