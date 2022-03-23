@@ -24,7 +24,8 @@
 				<!-- Navbar -->
 				<div class="ui attached inverted menu">
 				  	{{ m.nav_link('index', 'Home') }}
-				  	{{ m.nav_link('map', 'Map') }}
+				  	{{ m.nav_link('results', 'Results') }}
+				  	{{ m.nav_link('magic', 'Magic') }}
 					{{ m.nav_link('contact', 'Contact') }}
 				 	<div class="right menu">
 				 		<!-- User is logged in -->
@@ -50,7 +51,6 @@
    		</div>
 
 <!-- DAVE LOGO -->
-   		
    		<center>
    		<img src="static/images/pickflip_logo_1.png" alt="PickFlip Logo" width="290" height="90"> 
 		</center>
@@ -70,32 +70,15 @@
    			{% block content %}{% endblock %}
 
 
-<!-- DAVE SAMPLE CODE BLOCK  -->
-
-               <h2>Text Similarity Function</h2>
-               <br>
-               <form action="/predict_sim.html" method="POST" enctype="multipart/form-data">
-                    Query Texts: <input type="text" class="form-control" name="query_texts" placeholder="['i like chicken', 'human resources mgmt']"/>
-                    <br><br>
-                    Candidate Texts: <input type="text" class="form-control" name="candidate_texts" placeholder="['i love chicken', 'employment management']"/>
-                    <br><br>
-                    Top K predictions: <input type="int" class="form-control" name="top_k" placeholder="Default=3"/>
-                    <br><br>
-                    <input type="submit" />
-               </form>
-
-<!-- END DAVE SAMPLE CODE BLOCK  -->
-
-
    		</div>
 		<div id="footer">
 			<div class="ui divider"></div>
 	    		<div class="ui divided horizontal footer link list">
 			      	<div class="item">
-			        	Max Halford
+			        	PickFlip
 			      	</div>
 			      	<div class="item">
-			        	<a href="https://github.com/MaxHalford"><i class="github icon"></i></a>
+			        	<a href="https://github.com/dmc314/pickflip"><i class="github icon"></i></a>
 			      	</div>
 	    		</div>
 	  		</div>

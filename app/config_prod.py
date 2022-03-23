@@ -16,7 +16,7 @@ ADMIN_CREDENTIALS = ('admin', 'pa$$word')
 # SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
 # SQLALCHEMY_DATABASE_URI = 'mysql://username:password@server/db'
 # SQLALCHEMY_DATABASE_URI = 'mysql://root:db_pswd_77DRpeppers!@ec2-18-221-90-182.us-east-2.compute.amazonaws.com/pf_db'
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:db_pswd_77DRpeppers!@ec2-18-221-90-182.us-east-2.compute.amazonaws.com:3306/pf_db'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://admin:7crzNYZ#b8kH4_8@database-1.cjgjppmlnjua.us-east-2.rds.amazonaws.com:3306/pickflip'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # Configuration of a Gmail account for sending mails

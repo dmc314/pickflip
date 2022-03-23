@@ -10,6 +10,9 @@ class User(db.Model, UserMixin):
 
     __tablename__ = 'users'
 
+# Ryan or Abeer - generate user_uuid and put in db. Want to call this here too.
+# Also need to figure out generically how to query and write to the database
+
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     phone = db.Column(db.String)

@@ -11,7 +11,39 @@
 	{% if current_user.is_authenticated %}
 	  	<h2 class="ui header">Hi {{ current_user.first_name }}!</h2>
 
+<!-- DAVE SAMPLE CODE BLOCK  -->
+
+
+  <div class="container">
+    <h1>For your survey, please choose between Option A and B...</h1>
+    
+
+	<!-- Load Survey from Recommender Algorithm Here -->
+		<!-- Ryan front end load text and display  -->
+
+
+    <form action="/choose_survey" method="POST">
+      
+      <button type="submit" name="selection" class="btn btn-primary btn-lg" value="Option_A">Option A</button>
+      &nbsp; &nbsp;
+      <button type="submit" name="selection" class="btn btn-primary btn-lg" value="Option_B">Option B</button>
+      
+      <input type="hidden" name="current_user_first_name" value = {{ current_user.first_name }} >
+    </form>
+    
+    <br>
+<!-- Show results if any are there  -->
+        {% if messages is defined %}
+            <h2> RESULTS:</h2>
+            {{ messages['main'] }}
+        {% else %}
+              
+        {% endif %}
+
+<!-- END DAVE SAMPLE CODE BLOCK  -->
+
 
 	{% endif %}
 
 {% endblock %}
+

@@ -11,7 +11,7 @@ PROJECT    := $(shell basename $(PWD))
 install:
 	pip install -r requirements.txt
 
-## Setup developpement environment
+## Setup developement environment
 .PHONY: dev
 dev:
 	cd app && ln -sf config_dev.py config.py

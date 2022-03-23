@@ -1,0 +1,153 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+
+	   <h1 class="ui header">{{ title }}</h1>
+
+    {% if current_user.is_authenticated %}
+        <h2 class="ui header">Hi {{ current_user.first_name }}! Here is a Magic Text Similarity Function:</h2>
+
+<!-- DAVE SAMPLE CODE BLOCK  -->
+
+               <br>
+               <form action="/predict_sim" method="POST" enctype="multipart/form-data">
+                    Query Texts:     <input type="text" class="form-control" name="query_texts" placeholder="['i like chicken', 'human resources mgmt']" size=100/>
+                    <br><br>
+                    Candidate Texts: <input type="text" class="form-control" name="candidate_texts" placeholder="['i love chicken', 'employment management']" size=100/>
+                    <br><br>
+                    Top K predictions: <input type="int" class="form-control" name="top_k" placeholder="Default=3" size=15/>
+                    <br><br>
+                    <input type="submit" />
+               </form>
+               <br>
+<!-- Show results if any are there  -->
+        {% if messages is defined %}
+            <h2> RESULTS:</h2>
+            {{ messages['main'] }}
+        {% else %}
+              
+        {% endif %}
+
+
+<!-- DAVE SAMPLE CODE BLOCK  -->
+
+
+<!-- DAVE JAVASCRIPT VERSION OF BUTTONS???  -->
+    
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            /* fetch the following variables upon page load from an api call: "option_a_text", "option_b_text", "title_text" */
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://api.myjson.com/bins/1b8z1g', true);
+            xhr.onload = function() {
+              if (this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                option_a_text = data.option_a_text;
+                option_b_text = data.option_b_text;
+                title_text = data.title_text;
+                optionA.innerHTML = option_a_text;
+                optionB.innerHTML = option_b_text;
+                title.innerHTML = title_text;
+              }
+            };
+            xhr.send();
+
+
+            /* make it mobile responsive to changes in screen resolution */
+            var mobile_width = window.matchMedia("(max-width: 600px)");
+            if (mobile_width.matches) {
+              rect1.style.width = '50%';
+              rect2.style.width = '50%';
+              rect1.style.left = '25%';
+              rect2.style.left = '75%';
+            }
+
+            /* print "which do you prefer?" at top of page in large bold text */
+            var title_text = "Which do you prefer?";
+            var title = document.createElement('div');
+            title.style.fontSize = '40px';
+            title.style.fontWeight = 'bold';
+            title.style.textAlign = 'center';
+            title.innerHTML = title_text;
+            document.body.appendChild(title);
+
+
+            /* show two rectangles on the screen next to each other */
+            var rect1 = document.createElement('div');
+            rect1.style.width = '100px';
+            rect1.style.height = '200px';
+            rect1.style.top = '50%';
+            rect1.style.backgroundColor = 'lightblue';
+            rect1.style.border = '2px solid darkblue';
+            document.body.appendChild(rect1);
+
+            var rect2 = document.createElement('div');
+            rect2.style.width = '100px';
+            rect2.style.height = '200px';
+            rect2.style.top = '50%';
+            rect2.style.backgroundColor = 'lightblue';
+            rect2.style.border = '2px solid darkblue';
+            document.body.appendChild(rect2);
+
+
+            /* print "option A" inside rectangle 1 */
+            var option_a_text = "Option A";
+            var optionA = document.createElement('div');
+            optionA.style.fontSize = '20px';
+            optionA.style.fontWeight = 'bold';
+            optionA.style.textAlign = 'center';
+            optionA.innerHTML = option_a_text;
+            rect1.appendChild(optionA);
+
+            /* print "option B" inside rectangle 2 */
+            var option_b_text = "Option B";
+            var optionB = document.createElement('div');
+            optionB.style.fontSize = '20px';
+            optionB.style.fontWeight = 'bold';
+            optionB.style.textAlign = 'center';
+            optionB.innerHTML = option_b_text;
+            rect2.appendChild(optionB);
+
+
+            rect1.onclick = function() {
+              rect1.style.backgroundColor = 'orange';
+              selected_option = optionA.innerHTML;
+              setTimeout(function() {
+                rect1.style.backgroundColor = 'lightblue';
+              }, 200);
+            };
+
+
+            /* If user clicks on either rectangle, turn it light orange and record the text inside the rectangle to a variable "selected_option".  Wait  200 milliseconds and change color back to normal */ 
+            rect2.onclick = function() {
+              rect2.style.backgroundColor = 'orange';
+              selected_option = optionB.innerHTML;
+              setTimeout(function() {
+                rect2.style.backgroundColor = 'lightblue';
+              }, 200);
+            };
+            });
+
+
+            /* send the variable "selected_option" to a database through an API call */
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://api.myjson.com/bins/1b8z1g', true);
+            xhr.onload = function() {
+              if (this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                console.log(data);
+              }
+            };
+            xhr.send(selected_option);
+
+
+        </script>
+
+    {% endif %}
+
+{% endblock %}
