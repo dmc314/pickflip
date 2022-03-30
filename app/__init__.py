@@ -27,12 +27,14 @@ from flask.ext.bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 # Import the views
-from app.views import main, user, error
+from app.views import main, user, survey, error
 app.register_blueprint(user.userbp)
+app.register_blueprint(survey.surveybp)
 
-# Setup the user login process
+
+# Setup the user login process and survey database models
 from flask.ext.login import LoginManager
-from app.models import User
+from app.models import User, Survey, SurveyOptions
 
 login_manager = LoginManager()
 login_manager.init_app(app)
