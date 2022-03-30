@@ -8,9 +8,6 @@
 
 	<h1 class="ui header">{{ title }}</h1>
 
-	{% if current_user.is_authenticated %}
-	  	<h2 class="ui header">Hi {{ current_user.first_name }}!</h2>
-
 <!-- DAVE SAMPLE CODE BLOCK  -->
     <div class="container">
 
@@ -21,6 +18,8 @@
 
 <!-- END DAVE SAMPLE CODE BLOCK  -->
 
+	{% if current_user.is_authenticated %}
+	  	<h2 class="ui header">You are logged in as: {{ current_user.first_name }}!</h2>
 
 	{% endif %}
 

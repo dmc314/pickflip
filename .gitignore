@@ -1,7 +1,10 @@
 *.db
 *.log
 *.pyc
-config.py
-config_common.py
-config_dev.py
-config_prod.py
+*config.py
+*config_common.py
+*config_dev.py
+*config_prod.py
+app/config_prod.py
+app/config_dev.py
+app/admin.py

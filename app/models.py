@@ -42,3 +42,33 @@ class User(db.Model, UserMixin):
     def is_paid(self):
         return self.paid
 
+
+
+class Survey(db.Model):
+
+    ''' A survey '''
+
+    __tablename__ = 'surveys'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    survey_name = db.Column(db.String)
+    survey_keywords = db.Column(db.String)
+    survey_vector = db.Column(db.String)
+    created_by_user_id = db.Column(db.Integer)
+    
+    def __repr__(self):  # How it is called/represented
+        return '<Survey {0}, {1}>'.format(self.id, self.survey_name)
+
+
+class SurveyOptions(db.Model):
+
+    ''' The Options in a specific survey '''
+
+    __tablename__ = 'survey_options'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    survey_id = db.Column(db.String) # DMC Add foreign key constraint?
+    option_name = db.Column(db.String)
+    
+    def __repr__(self):  # How it is called/represented
+        return '<Survey Option {0}, {1}>'.format(self.id, self.option_name)
