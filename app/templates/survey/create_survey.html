@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+	<div class="ui form-survey center raised very padded text container segment">
+		<form class="ui form" action="/survey/create_survey" method="post">
+			<h4 class="ui dividing header">Create Survey</h4>
+	    	{{ m.render_field(form.survey_name) }}
+	    	{{ m.render_field(form.created_by_user_id) }}
+	    	{{ m.render_field(form.option1) }}
+	    	{{ m.render_field(form.option2) }}
+	    	{{ m.render_field(form.option3) }}
+	    	{{ m.render_field(form.option4) }}
+	    	{{ m.render_field(form.option5) }}
+	    	{{ m.render_field(form.option6) }}
+	    	{{ m.render_field(form.option7) }}	    		    {{ m.render_field(form.option8) }}	    		   
+ 			{{ form.csrf_token }}
+		  	<button class="ui primary button" type="submit">Submit</button>
+		</form>
+	</div>
+
+{% endblock %}
