@@ -4,7 +4,7 @@ import numpy as np
 # from datetime import datetime
 import scipy
 from scipy import spatial
-import text_pipeline
+from app.toolbox import text_pipeline
 
 from sentence_transformers import SentenceTransformer
 ft_model = SentenceTransformer('all-MiniLM-L6-v2')

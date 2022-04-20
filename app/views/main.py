@@ -1,9 +1,8 @@
 from flask import Flask, jsonify, request, make_response, render_template
 from app import app
 import random
-import text_similarity
-import text_pipeline
-
+from app.toolbox import text_similarity, text_pipeline
+from app.toolbox import attribution_calcs
 
 @app.route('/')
 @app.route('/index')
@@ -50,6 +49,40 @@ def choose_survey():
     output = "You picked: " + selection + " and you are logged in as: " + current_user_first_name
  
     return render_template("index.html", title='Home', messages={'main': output})
+ 
+
+@app.route('/report_attribution', methods=["POST", "GET"])
+def report_attribution():
+
+    # We now have these variables for survey logic:
+    if request.form['survey_id']:
+        survey_id = request.form['survey_id']
+    else:
+        survey_id = 1
+    if request.form['filter_is_verified']:
+        filter_is_verified = request.form['filter_is_verified']
+    else:
+        filter_is_verified = 0
+
+
+    # Define Filter State Dictionary for Results
+    filter_state={}
+    filter_state['verified'] = 1  # get from user.confirmation
+    filter_state['geo'] = "United States"  # get from user.country
+    filter_state['gender'] = "male"  # get from user.gender
+    filter_state['age_range'] = "adult"  # bin into 10 or 20 years using: (current_time - user.birth_year)
+    filter_state['date_range'] = "all"  # get from survey_responses.created_at
+
+    # Perform discrete choice attribution calcs
+    df_prep, list_options, option_index_list = attribution_calcs.prep_data_for_attribution_model(survey_id=survey_id, filter_state=filter_state)
+    
+    list_options, list_weights = attribution_calcs.compute_survey_attrib_weights(df_prep, list_options, option_index_list)
+    
+    output = "You picked survey_id: ", str(survey_id),\
+     "  Options:  ", str(list_options),\
+     "  Weighted Preferences:  ", str(list_weights)
+    
+    return render_template("results.html", title='Results', messages={'main': output})
  
 
 

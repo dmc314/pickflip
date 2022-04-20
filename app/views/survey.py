@@ -37,16 +37,14 @@ def create_survey():
         if form.option8.data:
             survey_options_list.append(form.option8.data)
 
-        new_survey = Survey(survey_name=survey_name, created_by_user_id=created_by_user_id)
-        db.session.add(new_survey)
-        db.session.commit()
-
-        # DMC Get the current or max survey_id so we can link the options to it
-        # This may not be robust forever if we have concurrent users...need to pass a UUID generated here at the same time to both tables
+        # Get max survey_id so we can add survey and options to respective db tables
         max_survey_id = db.session.query(func.max(Survey.id)).scalar()
+
+        new_survey = Survey(id=max_survey_id+1, survey_name=survey_name, created_by_user_id=created_by_user_id)
+        db.session.add(new_survey)
         
         for option in survey_options_list:
-            new_survey_option = SurveyOptions(survey_id=max_survey_id, option_name=option)
+            new_survey_option = SurveyOptions(survey_id=max_survey_id+1, option_name=option)
             db.session.add(new_survey_option)
     
         # Insert the survey and survey_options into the database
