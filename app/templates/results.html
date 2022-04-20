@@ -13,8 +13,26 @@
 
                <h3>(Show Results Graphs Here...)</h3>
                <br>
-               <br> 
+	</div>
 
+               <form action="/report_attribution" method="POST" enctype="multipart/form-data">
+                    Survey ID:     <input type="text" class="form-control" name="survey_id" placeholder="int here..." size=50/>
+                    <br><br>
+                    Search Survey Description & Options: <input type="text" class="form-control" name="search_query" placeholder="keywords here..." size=50/>
+                    <br><br>
+                    Filter Results for Verified Users (1 or 0): <input type="text" class="form-control" name="filter_is_verified" placeholder="1 for yes, 0 for no here..." size=50/>
+                    <br><br>
+                    <input type="submit" />
+               </form>
+               <br>
+
+<!-- Show results if any are there  -->
+        {% if messages is defined %}
+            <h2> RESULTS:</h2>
+            {{ messages['main'] }}
+        {% else %}
+              
+        {% endif %}
 
 <!-- END DAVE SAMPLE CODE BLOCK  -->
 
